@@ -1,0 +1,9 @@
+string = input("Input long string: ")
+sub = input("Input substring: ")
+
+string = 'X' + string
+dog = [i for i in range(len(string)) if string.startswith(sub, i)]
+#dog = map(str, dog)
+print(dog)
+print(type(dog))
+print(" ".join([str(x) for x in dog]))

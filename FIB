@@ -1,0 +1,21 @@
+n = 5
+k = 3
+f0 = 1
+z = 0
+gen = 1
+gens = []
+while z < n: 
+	if z == 0:
+		pairs = 1
+		gens.append(pairs)
+		gen = 1 
+		print("gen: ", gen, "pairs: ", pairs)
+		z += 1
+	elif z == 1:
+		pairs = 1 + k
+		gens.append(pairs)
+		gen = 2
+		print("gen: ", gen, "pairs: ", pairs)
+		z += 1
+	else:
+		pairs = 
