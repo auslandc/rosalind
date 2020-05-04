@@ -1,0 +1,50 @@
+##calculate GC content of fasta sqeuences and return the sequence id with the greatest GC content and its GC content
+
+from sys import argv
+
+file = argv[1]
+
+###function to read in fasta sequences as nested list
+def fasta_import(file):
+	'''reads in fasta sequence file and returns a nested list of [id, sequence] '''
+	fileread = [i.strip() for i in open(file).readlines()]
+	id = ''
+	seq = []
+	readin = []
+	for i in fileread:
+		if i.startswith(">"):
+			seq2 = "".join(seq)
+			readin.append([id, seq2])
+			id = i 
+			seq = []
+		else:
+			seq.append(i)
+	seq2 = "".join(seq)
+	readin.append([id, seq2])
+	result = readin[1:]
+	return result
+
+###create sequence file object
+seqs = fasta_import(file)
+for i in seqs:
+	print(i)
+
+###function to calculate GC content
+def gc(seq):
+	g = seq.upper().count('G')
+	c = seq.upper().count('C')
+	length = len(seq)
+	gc_content = ((g+c)/length)*100
+	return "%0.6f" % gc_content
+
+###max GC objects
+maxid, max = "", 0.0
+
+###iterate through sequences, calculate GC content and find max 
+for i in seqs:
+	content = gc(i[1])
+	if float(content) > max:
+		maxid, max = i[0], float(content)
+		
+print(maxid)
+print(max)
