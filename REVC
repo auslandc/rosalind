@@ -1,0 +1,7 @@
+from sys import argv
+
+dna_seq = argv[1]
+
+rna_seq = dna_seq.replace('A', 'X').replace('T', 'A').replace('X', 'T').replace('G', 'X').replace('C', 'G').replace('X', 'C')
+rna_seq2 = rna_seq[::-1]
+print(rna_seq2)

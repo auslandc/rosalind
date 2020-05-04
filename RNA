@@ -1,0 +1,7 @@
+from sys import argv
+
+dna_string = argv[1]
+
+rna = dna_string.replace('T', 'U')
+
+print(rna)

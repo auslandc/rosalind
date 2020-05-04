@@ -1,0 +1,10 @@
+from sys import argv
+
+dna_string = argv[1]
+
+A = dna_string.count('A')
+C = dna_string.count('C')
+G = dna_string.count('G')
+T = dna_string.count('T')
+
+print(A, C, G, T)
