@@ -1,21 +1,14 @@
-n = 5
-k = 3
-f0 = 1
-z = 0
-gen = 1
-gens = []
-while z < n: 
-	if z == 0:
-		pairs = 1
-		gens.append(pairs)
-		gen = 1 
-		print("gen: ", gen, "pairs: ", pairs)
-		z += 1
-	elif z == 1:
-		pairs = 1 + k
-		gens.append(pairs)
-		gen = 2
-		print("gen: ", gen, "pairs: ", pairs)
-		z += 1
+from sys import argv
+
+n = int(argv[1])
+k = int(argv[2]) 
+
+def recur(n, k):
+	if n == 0:
+		return 0
+	elif n == 1:
+		return 1
 	else:
-		pairs = 
+		return recur(n-1, k)+(k*recur(n-2, k))
+
+print(recur(n,k))
