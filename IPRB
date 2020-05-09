@@ -1,0 +1,22 @@
+from sys import argv
+import itertools
+
+k = int(argv[1])  # AA  homozygous dominant
+m = int(argv[2])  # Aa  heterozygous
+n = int(argv[3])  # aa  homozygous recessive
+
+kn = 4 * k * n
+km = 4 * k * m
+kk = 4 * len(list(itertools.combinations(['k']*k,2)))
+mn = 2 * m * n
+mm = 3 * len(list(itertools.combinations(['m']*m,2)))
+nn = 0
+
+pop = ['k']*k + ['m']*m + ['n']*n
+total_num_poss = 4 * len(list(itertools.combinations(pop,2)))
+
+pop_dom = sum([kn, km, kk, mn, mm])
+
+print(sum([kn, km, kk, mn, mm]))
+print(total_num_poss)
+print(pop_dom/total_num_poss)
