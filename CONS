@@ -1,0 +1,78 @@
+#return consensus sequence and matrix for collection of sequences
+
+from sys import argv
+
+file = argv[1]
+out = open("CONS_OUT", "w+")
+
+###function to read in fasta sequences as nested list
+def fasta_import(file):
+	'''reads in fasta sequence file and returns a nested list of [id, sequence] '''
+	fileread = [i.strip() for i in open(file).readlines()]
+	id = ''
+	seq = []
+	readin = []
+	for i in fileread:
+		if i.startswith(">"):
+			seq2 = "".join(seq)
+			readin.append([id, seq2])
+			id = i 
+			seq = []
+		else:
+			seq.append(i)
+	seq2 = "".join(seq)
+	readin.append([id, seq2])
+	result = readin[1:]
+	return result
+
+fasta = [i[1] for i in fasta_import(file)]
+
+#create four lists
+A, T, C, G = [0] * len(fasta[0]), [0] * len(fasta[0]), [0] * len(fasta[0]), [0] * len(fasta[0])
+
+for i in fasta:
+	for j in range(0, len(i)):
+		if i[j] == 'A':
+			A[j] += 1
+		elif i[j] == 'T':
+			T[j] += 1
+		elif i[j] == 'C':
+			C[j] += 1
+		else:
+			G[j] += 1
+			
+A2 = "A: "+" ".join([str(i) for i in A])
+C2 = "C: "+" ".join([str(i) for i in C])
+T2 = "T: "+" ".join([str(i) for i in T])
+G2 = "G: "+" ".join([str(i) for i in G])
+
+matrix = "\n".join([A2, C2, G2, T2])
+
+consensus = ""
+
+for i in range(0, len(fasta[0])):
+	if max([A[i], C[i], T[i], G[i]]) == A[i]:
+		consensus += 'A'
+	elif max([A[i], C[i], T[i], G[i]]) == C[i]:
+		consensus += 'C'
+	elif max([A[i], C[i], T[i], G[i]]) == T[i]:
+		consensus += 'T'
+	else:
+		consensus += 'G'
+
+print(consensus, file=out)
+print(matrix, file=out)
+
+out.close()
+
+
+
+
+
+
+
+
+
+
+
+
